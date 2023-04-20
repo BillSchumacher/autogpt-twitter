@@ -4,7 +4,10 @@ from typing import Any, Dict, List, Optional, Tuple, TypedDict, TypeVar
 
 import tweepy
 from auto_gpt_plugin_template import AutoGPTPluginTemplate
+from dotenv import load_dotenv
 
+with open(f"{os.getcwd()}/.env") as f:
+    load_dotenv(stream=f)
 
 PromptGenerator = TypeVar("PromptGenerator")
 
@@ -32,7 +35,7 @@ class AutoGPTTwitter(AutoGPTPluginTemplate):
         self.twitter_access_token_secret = os.getenv("TW_ACCESS_TOKEN_SECRET")
         self.tweet_id = []
         self.tweets = []
-
+        print("Twitter API Key: ", self.twitter_api_key)
         # Authenticating to twitter
         self.auth = tweepy.OAuth1UserHandler(
             self.twitter_consumer_key,
