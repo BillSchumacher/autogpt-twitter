@@ -51,12 +51,10 @@ def search_twitter_user(targetUser, numOfItems):
                             tweet_mode='extended').items(numOfItems)
 
     columns = ['Time', 'User', 'ID', 'Tweet']
-    data = []
-
-    for tweet in _tweets:
-        data.append([tweet.created_at, tweet.user.screen_name,
-                     tweet.id, tweet.full_text])
-
+    data = [
+        [tweet.created_at, tweet.user.screen_name, tweet.id, tweet.full_text]
+        for tweet in _tweets
+    ]
     df = str(pd.DataFrame(data, columns=columns))
 
     print(df)
